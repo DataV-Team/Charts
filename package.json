@@ -1,0 +1,30 @@
+{
+  "name": "@jiaminghi/charts",
+  "version": "0.0.0",
+  "author": "JiaMing <743192023@qq.com>",
+  "description": "Lightweight charting",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jiaming743/charts.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jiaming743/charts/issues"
+  },
+  "keywords": [
+    "canvas",
+    "charts",
+    "line",
+    "bar",
+    "radar",
+    "pie"
+  ],
+  "homepage": "https://github.com/jiaming743/charts#readme",
+  "dependencies": {
+    "@jiaminghi/c-render": "*"
+  }
+}
