@@ -1,3 +1,10 @@
+# 0.0.2-alpha (2019-05-30)
+
+### Perfect
+
+- **pie:** Optimized Label `formatter`.
+- **pie:** Add the `roseSort` configuration.
+
 # 0.0.1-alpha (2019-05-30)
 
 ### Perfect
