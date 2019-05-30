@@ -1,6 +1,6 @@
 {
   "name": "@jiaminghi/charts",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": "JiaMing <743192023@qq.com>",
   "description": "Lightweight charting",
   "main": "index.js",
