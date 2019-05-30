@@ -1,3 +1,9 @@
+# 0.0.3-alpha (2019-05-30)
+
+### Bug Fixes
+
+- **pie:** Abnormal calculation of radius under `roseType: true`.
+
 # 0.0.2-alpha (2019-05-30)
 
 ### Perfect
