@@ -5,7 +5,7 @@ export const pieConfig = {
   startAngle: -Math.PI / 2,
   roseType: false,
   roseSort: true,
-  roseIncrement: '15%',
+  roseIncrement: 'auto',
   insideLabel: {
     show: false,
     formatter: '{percent}%',
