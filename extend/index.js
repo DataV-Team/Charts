@@ -2,6 +2,10 @@ import { extendNewGraph } from '@jiaminghi/c-render'
 
 import { getCircleRadianPoint } from '@jiaminghi/c-render/lib/util'
 
+import { getColorFromRgbValue } from '@jiaminghi/color'
+
+import { getLinearGradientColor } from '../util/index'
+
 const pie = {
   shape: {
     rx: 0,
@@ -51,4 +55,58 @@ const pie = {
   }
 }
 
+const agArc = {
+  shape: {
+    rx: 0,
+    ry: 0,
+    r: 0,
+    startAngle: 0,
+    endAngle: 0
+  },
+
+  validator ({ shape }) {
+    const keys = ['rx', 'ry', 'r', 'startAngle', 'endAngle']
+
+    if (keys.find(key => typeof shape[key] !== 'number')) {
+      console.error('Shape configuration is abnormal!')
+
+      return false
+    }
+
+    return true
+  },
+
+  draw ({ ctx }, { shape, style }) {
+    let { gradient } = style
+
+    gradient = gradient.map(cv => getColorFromRgbValue(cv))
+
+    if (gradient.length === 1) {
+      gradient = [gradient[0], gradient[0]]
+    }
+
+    const gradientArcNum = gradient.length - 1
+
+    const { startAngle, endAngle, r, rx, ry } = shape
+
+    const angleGap = (endAngle - startAngle) / gradientArcNum
+
+    for (let i = 0; i < gradientArcNum; i++) {
+      ctx.beginPath()
+
+      const startPoint = getCircleRadianPoint(rx, ry, r, startAngle + angleGap * i)
+      const endPoint = getCircleRadianPoint(rx, ry, r, startAngle + angleGap * (i + 1))
+
+      const color = getLinearGradientColor(ctx, startPoint, endPoint, [gradient[i], gradient[i + 1]])
+
+      ctx.arc(rx, ry, r, startAngle + angleGap * i, startAngle + angleGap * (i + 1))
+
+      ctx.strokeStyle = color
+
+      ctx.stroke()
+    }
+  }
+}
+
 extendNewGraph('pie', pie)
+extendNewGraph('agArc', agArc)

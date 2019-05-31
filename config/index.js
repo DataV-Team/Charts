@@ -15,3 +15,5 @@ export { pieConfig } from './pie'
 export { radarAxisConfig } from './radarAxis'
 
 export { radarConfig } from './radar'
+
+export { gaugeConfig } from './gauge'

@@ -6,7 +6,7 @@ import { deepClone } from '@jiaminghi/c-render/lib/util'
 
 import { mergeColor, title, grid, axis, radarAxis } from '../lib'
 
-import { pie, line, bar, radar } from '../lib'
+import { pie, line, bar, radar, gauge } from '../lib'
 
 export default class Charts {
   constructor (dom) {
@@ -62,6 +62,8 @@ Charts.prototype.setOption = function (option) {
   pie(this, optionCloned)
 
   radar(this, optionCloned)
+
+  gauge(this, optionCloned)
 
   this.option = option
 
