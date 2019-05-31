@@ -1,3 +1,9 @@
+# 0.0.4-alpha (2019-05-31)
+
+### Perfect
+
+- **Perfect:** Some optimization.
+
 # 0.0.3-alpha (2019-05-30)
 
 ### Bug Fixes
