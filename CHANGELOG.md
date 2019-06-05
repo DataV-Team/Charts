@@ -1,3 +1,13 @@
+# 0.1.0-alpha (2019-06-05)
+
+### New
+
+- **gauge:** Add `gauge` chart.
+
+### Perfect
+
+- **Core:** Optimize the update process.
+
 # 0.0.4-alpha (2019-05-31)
 
 ### Perfect
