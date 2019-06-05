@@ -1,3 +1,5 @@
+import { deepClone } from '@jiaminghi/c-render/lib/util'
+
 export function filterNonNumber(array) {
   return array.filter(n => typeof n === 'number')
 }
@@ -75,4 +77,16 @@ export function getPointToLineDistance (point, linePointOne, linePointTwo) {
   const c = getTwoPointDistance(linePointOne, linePointTwo)
 
   return 0.5 * Math.sqrt((a + b + c) * (a + b - c) * (a + c - b) * (b + c - a)) / c
+}
+
+export function initNeedSeries (series, config, type) {
+  series = series.filter(({ type: st }) => st === type)
+
+  series = series.map(item => deepMerge(deepClone(config, true), item))
+
+  return series.filter(({ show }) => show)
+}
+
+export function radianToAngle (radian) {
+  return radian / Math.PI * 180
 }
