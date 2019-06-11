@@ -1,3 +1,9 @@
+# 0.1.2-alpha (2019-06-11)
+
+### Bug Fixes
+
+- **axis:** An exception caused by calculate inteval.
+
 # 0.1.1-alpha (2019-06-11)
 
 ### Perfect
