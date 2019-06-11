@@ -337,7 +337,11 @@ function getValuePos (min, max, value, linePosition, axis) {
 
   const posMinus = linePosition[1][coordinateIndex] - linePosition[0][coordinateIndex]
 
-  const pos = (value - min) / valueMinus * posMinus
+  let percent = (value - min) / valueMinus
+
+  if (valueMinus === 0) percent = 0
+
+  const pos = percent * posMinus
 
   return pos + linePosition[0][coordinateIndex]
 }
