@@ -131,8 +131,6 @@ export const pieConfig = {
    * @default style = {Configuration Of Class Style}
    */
   pieStyle: {
-    shadowColor: '#888',
-    shadowBlur: 5
   },
   /**
    * @description Percentage fractional precision

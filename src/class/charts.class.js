@@ -2,11 +2,11 @@ import '../extend/index'
 
 import CRender from '@jiaminghi/c-render'
 
-import { deepClone } from '@jiaminghi/c-render/lib/util'
+import { deepClone } from '@jiaminghi/c-render/lib/plugin/util'
 
-import { mergeColor, title, grid, axis, radarAxis } from '../lib'
+import { mergeColor, title, grid, axis, radarAxis } from '../core'
 
-import { pie, line, bar, radar, gauge } from '../lib'
+import { pie, line, bar, radar, gauge } from '../core'
 
 export default class Charts {
   constructor (dom) {
@@ -36,6 +36,11 @@ export default class Charts {
   }
 }
 
+/**
+ * @description Set chart option
+ * @param {Object} option Chart option
+ * @return {Undefined} No return
+ */
 Charts.prototype.setOption = function (option) {
   if (!option || typeof option !== 'object') {
     console.error('setOption Missing parameters!')
@@ -72,6 +77,10 @@ Charts.prototype.setOption = function (option) {
   // console.warn(this)
 }
 
+/**
+ * @description Resize chart
+ * @return {Undefined} No return
+ */
 Charts.prototype.resize = function () {
   const { container, canvas, render, option } = this
 

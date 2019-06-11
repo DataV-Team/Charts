@@ -1,6 +1,6 @@
 import { extendNewGraph } from '@jiaminghi/c-render'
 
-import { getCircleRadianPoint } from '@jiaminghi/c-render/lib/util'
+import { getCircleRadianPoint } from '@jiaminghi/c-render/lib/plugin/util'
 
 import { getColorFromRgbValue } from '@jiaminghi/color'
 

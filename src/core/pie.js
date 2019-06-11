@@ -2,7 +2,7 @@ import { doUpdate } from '../class/updater.class'
 
 import { pieConfig } from '../config/pie'
 
-import { getCircleRadianPoint } from '@jiaminghi/c-render/lib/util'
+import { getCircleRadianPoint } from '@jiaminghi/c-render/lib/plugin/util'
 
 import { deepMerge, initNeedSeries, mulAdd, getPolylineLength } from '../util'
 

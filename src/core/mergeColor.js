@@ -1,6 +1,6 @@
 import { colorConfig } from '../config'
 
-import { deepClone } from '@jiaminghi/c-render/lib/util'
+import { deepClone } from '@jiaminghi/c-render/lib/plugin/util'
 
 import { deepMerge } from '../util'
 

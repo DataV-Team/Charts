@@ -184,6 +184,12 @@ export const gaugeConfig = {
      */
     offset: [0, 0],
     /**
+     * @description Value fractional precision
+     * @type {Number}
+     * @default valueToFixed = 0
+     */
+    valueToFixed: 0,
+    /**
      * @description Details position
      * @type {String}
      * @default position = 'center'

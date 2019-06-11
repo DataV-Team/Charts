@@ -2,7 +2,7 @@ import { doUpdate } from '../class/updater.class'
 
 import { gaugeConfig } from '../config/gauge'
 
-import { getCircleRadianPoint } from '@jiaminghi/c-render/lib/util'
+import { getCircleRadianPoint } from '@jiaminghi/c-render/lib/plugin/util'
 
 import { deepMerge, initNeedSeries, radianToAngle } from '../util'
 
@@ -555,17 +555,20 @@ function getDetailsConfig (gaugeItem) {
 }
 
 function getDetailsShape (gaugeItem, i) {
-  const { detailsPosition, detailsContent, data } = gaugeItem
+  const { detailsPosition, detailsContent, data, details } = gaugeItem
 
   const position = detailsPosition[i]
   const content = detailsContent[i]
 
   const dataValue = data[i].value
 
+  const toFixed = details.valueToFixed
+
   return {
     number: [dataValue],
     content,
-    position
+    position,
+    toFixed
   }
 }
 

@@ -2,7 +2,7 @@ import { doUpdate } from '../class/updater.class'
 
 import { radarConfig } from '../config/index'
 
-import { getCircleRadianPoint } from '@jiaminghi/c-render/lib/util'
+import { getCircleRadianPoint } from '@jiaminghi/c-render/lib/plugin/util'
 
 import { getColorFromRgbValue, getRgbaValue } from '@jiaminghi/color'
 

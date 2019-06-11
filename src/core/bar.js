@@ -2,7 +2,7 @@ import { doUpdate } from '../class/updater.class'
 
 import { barConfig } from '../config'
 
-import { deepClone } from '@jiaminghi/c-render/lib/util'
+import { deepClone } from '@jiaminghi/c-render/lib/plugin/util'
 
 import { deepMerge, initNeedSeries, mergeSameStackData } from '../util'
 

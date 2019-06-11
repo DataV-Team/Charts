@@ -1,4 +1,4 @@
-import { deepClone } from '@jiaminghi/c-render/lib/util'
+import { deepClone } from '@jiaminghi/c-render/lib/plugin/util'
 
 export function filterNonNumber(array) {
   return array.filter(n => typeof n === 'number')

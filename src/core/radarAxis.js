@@ -2,7 +2,7 @@ import { doUpdate } from '../class/updater.class'
 
 import { radarAxisConfig } from '../config/index'
 
-import { deepClone, getCircleRadianPoint } from '@jiaminghi/c-render/lib/util'
+import { deepClone, getCircleRadianPoint } from '@jiaminghi/c-render/lib/plugin/util'
 
 import { deepMerge, getPointToLineDistance } from '../util'
 
@@ -215,15 +215,13 @@ function beforeUpdateSplitArea (graphs, radarAxis, i, updater) {
 
   const { name } = cache[0]
 
-  const currenName = polygon ? 'regPolygon' : 'ring'
+  const currentName = polygon ? 'regPolygon' : 'ring'
 
-  const delAll = currenName !== name
+  const delAll = currentName !== name
 
   if (!delAll) return
 
   cache.forEach(g => render.delGraph(g))
-
-  cache.splice(0)
 
   graphs[i] = null
 }
@@ -302,8 +300,6 @@ function beforeUpdateSplitLine (graphs, radarAxis, i, updater) {
   if (!delAll) return
 
   cache.forEach(g => render.delGraph(g))
-
-  cache.splice(0)
 
   graphs[i] = null
 }

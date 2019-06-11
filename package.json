@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "author": "JiaMing <743192023@qq.com>",
   "description": "Lightweight charting",
-  "main": "index.js",
+  "main": "lib/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/jiaming743/charts.git"
   },
   "scripts": {
+    "compile": "babel -d lib/ src/",
+    "prepublish": "npm run compile",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "license": "MIT",
@@ -25,6 +27,12 @@
   ],
   "homepage": "https://github.com/jiaming743/charts#readme",
   "dependencies": {
+    "@babel/polyfill": "^7.4.4",
     "@jiaminghi/c-render": "*"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5"
   }
 }
