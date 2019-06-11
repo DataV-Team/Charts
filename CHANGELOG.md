@@ -1,3 +1,13 @@
+# 0.1.1-alpha (2019-06-11)
+
+### Perfect
+
+- **core:** Optimize the update process.
+
+- **config:** Add a function of `changeDefaultConfig` to change the default configuration.
+
+- **ES5:** Use babel to transcode to `ES5`.
+
 # 0.1.0-alpha (2019-06-05)
 
 ### New
