@@ -333,6 +333,8 @@ function getValueInterval (min, max, axis) {
 
   if (valueInterval.toString().length > 1) valueInterval = parseInt(valueInterval.toString().replace(/\d$/, '0'))
 
+  if (valueInterval === 0) valueInterval = 1
+
   if (typeof minInterval === 'number' && valueInterval < minInterval) return minInterval
 
   if (typeof maxInterval === 'number' && valueInterval > maxInterval) return maxInterval
