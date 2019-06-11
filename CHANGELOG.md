@@ -1,3 +1,9 @@
+# 0.1.3-alpha (2019-06-11)
+
+### Bug Fixes
+
+- **bar:** An exception caused by calculate gradientParams.
+
 # 0.1.2-alpha (2019-06-11)
 
 ### Bug Fixes
@@ -41,6 +47,7 @@
 ### Perfect
 
 - **pie:** Optimized Label `formatter`.
+
 - **pie:** Add the `roseSort` configuration.
 
 # 0.0.1-alpha (2019-05-30)
