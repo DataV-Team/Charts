@@ -1,3 +1,9 @@
+# 0.2.1-alpha (2019-06-13)
+
+### Perfect
+
+- **core:** Configurable render level.
+
 # 0.2.0-alpha (2019-06-13)
 
 ### New
