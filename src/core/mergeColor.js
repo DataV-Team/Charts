@@ -19,7 +19,11 @@ export function mergeColor (chart, option = {}) {
 
   const colorNum = color.length
 
-  series.forEach((item, i) => (item.color = color[i % colorNum]))
+  series.forEach((item, i) => {
+    if (item.color) return
+
+    item.color = color[i % colorNum]
+  })
 
   const pies = series.filter(({ type }) => type === 'pie')
 
