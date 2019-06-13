@@ -1,6 +1,6 @@
 import { extendNewGraph } from '@jiaminghi/c-render'
 
-import { getCircleRadianPoint } from '@jiaminghi/c-render/lib/plugin/util'
+import { getCircleRadianPoint, checkPointIsInRect } from '@jiaminghi/c-render/lib/plugin/util'
 
 import { getColorFromRgbValue } from '@jiaminghi/color'
 
@@ -177,6 +177,71 @@ const numberText = {
   }
 }
 
+const lineIcon = {
+  shape: {
+    x: 0,
+    y: 0,
+    w: 0,
+    h: 0
+  },
+
+  validator ({ shape }) {
+    const { x, y, w, h } = shape
+
+    if (typeof x !== 'number' || typeof y !== 'number' || typeof w !== 'number' || typeof h !== 'number') {
+      console.error('lineIcon shape configuration is abnormal!')
+
+      return false
+    }
+
+    return true
+  },
+
+  draw ({ ctx }, { shape }) {
+    ctx.beginPath()
+
+    let { x, y, w, h } = shape
+
+    const halfH = h / 2
+
+    ctx.strokeStyle = ctx.fillStyle
+
+    ctx.moveTo(x, y + halfH)
+    ctx.lineTo(x + w, y + halfH)
+
+    ctx.lineWidth = 1
+
+    ctx.stroke()
+
+    ctx.beginPath()
+
+    let radius = halfH - 5 * 2
+    if (radius <= 0) radius = 3
+
+    ctx.arc(x + w / 2, y + halfH, radius, 0, Math.PI * 2)
+
+    ctx.lineWidth = 5
+
+    ctx.stroke()
+
+    ctx.fillStyle = '#fff'
+    ctx.fill()
+  },
+
+  hoverCheck (position, { shape }) {
+    let { x, y, w, h } = shape
+
+    return checkPointIsInRect(position, x, y, w, h)
+  },
+
+  setGraphCenter (e, { shape, style }) {
+    const { x, y, w, h } = shape
+
+    style.graphCenter = [x + w / 2, y + h / 2]
+  },
+}
+
 extendNewGraph('pie', pie)
 extendNewGraph('agArc', agArc)
 extendNewGraph('numberText', numberText)
+extendNewGraph('lineIcon', lineIcon)
