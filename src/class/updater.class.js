@@ -97,6 +97,8 @@ function addGraphs (graphs, seriesItem, i, updater) {
 
   const configs = getGraphConfig(seriesItem, updater)
 
+  if (!configs.length) return
+
   if (startConfigs) {
     graphs[i] = startConfigs.map(config => render.add(config))
 
