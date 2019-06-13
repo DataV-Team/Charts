@@ -1,3 +1,10 @@
+# 0.2.2-alpha (2019-06-13)
+
+### Bug Fixes
+
+- **axis:** The label position is abnormal when the label is rotated.
+- **gauge:** An exception caused by inconsistent number of gradient colors.
+
 # 0.2.1-alpha (2019-06-13)
 
 ### Perfect
