@@ -574,16 +574,17 @@ function getLabelConfig (axisItem) {
   const { animationCurve, animationFrame, rLevel } = axisItem
 
   const shapes = getLabelShapes(axisItem)
-  const style = getLabelStyle(axisItem)
+  const styles = getLabelStyle(axisItem, shapes)
 
-  return shapes.map(shape => ({
+  return shapes.map((shape, i) => ({
     name: 'text',
     index: rLevel,
     visible: axisItem.axisLabel.show,
     animationCurve,
     animationFrame,
     shape,
-    style
+    style: styles[i],
+    setGraphCenter: () => (void 0)
   }))
 }
 
@@ -592,7 +593,7 @@ function getLabelShapes (axisItem) {
 
   return tickPosition.map((point, i) => ({
     position: getLabelRealPosition(point, position),
-    content: label[i].toString()
+    content: label[i].toString(),
   }))
 }
 
@@ -608,14 +609,21 @@ function getLabelRealPosition (points, position) {
   return points
 }
 
-function getLabelStyle (axisItem) {
+function getLabelStyle (axisItem, shapes) {
   const { position } = axisItem
 
-  const { style } = axisItem.axisLabel
+  let { style } = axisItem.axisLabel
 
   const align = getAxisLabelRealAlign(position)
 
-  return deepMerge(align, style)
+  style = deepMerge(align, style)
+
+  const styles = shapes.map(({ position }) => ({
+    ...style,
+    graphCenter: position
+  }))
+
+  return styles
 }
 
 function getAxisLabelRealAlign (position) {
