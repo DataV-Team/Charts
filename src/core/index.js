@@ -17,3 +17,5 @@ export { radarAxis } from './radarAxis'
 export { radar } from './radar'
 
 export { gauge } from './gauge'
+
+export { legend } from './legend'

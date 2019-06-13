@@ -18,6 +18,8 @@ import { radarConfig } from './radar'
 
 import { gaugeConfig } from './gauge'
 
+import { legendConfig } from './legend'
+
 import { deepMerge } from '../util'
 
 const allConfig = {
@@ -31,7 +33,8 @@ const allConfig = {
   pieConfig,
   radarAxisConfig,
   radarConfig,
-  gaugeConfig
+  gaugeConfig,
+  legendConfig
 }
 
 /**
@@ -53,6 +56,7 @@ export function changeDefaultConfig (key, config) {
 export const keys = [
   'color',
   'title',
+  'legend',
   'xAxis',
   'yAxis',
   'grid',
@@ -75,5 +79,6 @@ export {
   pieConfig,
   radarAxisConfig,
   radarConfig,
-  gaugeConfig
+  gaugeConfig,
+  legendConfig
 }
