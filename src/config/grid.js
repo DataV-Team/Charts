@@ -36,6 +36,13 @@ export const gridConfig = {
     fill: 'rgba(0, 0, 0, 0)'
   },
   /**
+   * @description Grid render level
+   * Priority rendering high level
+   * @type {Number}
+   * @default rLevel = -30
+   */
+  rLevel: -30,
+  /**
    * @description Grid animation curve
    * @type {String}
    * @default animationCurve = 'easeOutCubic'

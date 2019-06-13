@@ -93,6 +93,13 @@ export const radarConfig = {
     }
   },
   /**
+   * @description Radar chart render level
+   * Priority rendering high level
+   * @type {Number}
+   * @default rLevel = 10
+   */
+  rLevel: 10,
+  /**
    * @description Radar animation curve
    * @type {String}
    * @default animationCurve = 'easeOutCubic'

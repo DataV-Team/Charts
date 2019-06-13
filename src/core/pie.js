@@ -349,10 +349,11 @@ function addLabelLineAndAlign (dataItem, pieItem, left = true) {
 }
 
 function getPieConfig (pieItem) {
-  const { data, animationCurve, animationFrame } = pieItem
+  const { data, animationCurve, animationFrame, rLevel } = pieItem
 
   return data.map((foo, i) => ({
     name: 'pie',
+    index: rLevel,
     animationCurve,
     animationFrame,
     shape: getPieShape(pieItem, i),
@@ -407,10 +408,11 @@ function getPieStyle (pieItem, i) {
 }
 
 function getInsideLabelConfig (pieItem) {
-  const { animationCurve, animationFrame, data } = pieItem
+  const { animationCurve, animationFrame, data, rLevel } = pieItem
 
   return data.map((foo, i) => ({
     name: 'text',
+    index: rLevel,
     visible: pieItem.insideLabel.show,
     animationCurve,
     animationFrame,
@@ -453,10 +455,11 @@ function getInsideLabelStyle (pieItem, i) {
 }
 
 function getOutsideLabelLineConfig (pieItem) {
-  const { animationCurve, animationFrame, data } = pieItem
+  const { animationCurve, animationFrame, data, rLevel } = pieItem
 
   return data.map((foo, i) => ({
     name: 'polyline',
+    index: rLevel,
     visible: pieItem.outsideLabel.show,
     animationCurve,
     animationFrame,
@@ -498,10 +501,11 @@ function getOutsideLabelLineStyle (pieItem, i) {
 }
 
 function getOutsideLabelConfig (pieItem) {
-  const { animationCurve, animationFrame, data } = pieItem
+  const { animationCurve, animationFrame, data, rLevel } = pieItem
 
   return data.map((foo, i) => ({
     name: 'text',
+    index: rLevel,
     visible: pieItem.outsideLabel.show,
     animationCurve,
     animationFrame,

@@ -123,10 +123,11 @@ function calcRadarLabelAlign (radars, chart) {
 }
 
 function getRadarConfig (radarItem) {
-  const { animationCurve, animationFrame } = radarItem
+  const { animationCurve, animationFrame, rLevel } = radarItem
 
   return [{
     name: 'polyline',
+    index: rLevel,
     animationCurve,
     animationFrame,
     shape: getRadarShape(radarItem),
@@ -190,10 +191,11 @@ function beforeChangeRadar (graph, { shape }) {
 }
 
 function getPointConfig (radarItem) {
-  const { radarPosition, animationCurve, animationFrame } = radarItem
+  const { radarPosition, animationCurve, animationFrame, rLevel } = radarItem
 
   return radarPosition.map((foo, i) => ({
     name: 'circle',
+    index: rLevel,
     animationCurve,
     animationFrame,
     visible: radarItem.point.show,
@@ -233,10 +235,11 @@ function getPointStyle (radarItem, i) {
 }
 
 function getLabelConfig (radarItem) {
-  const { labelPosition, animationCurve, animationFrame } = radarItem
+  const { labelPosition, animationCurve, animationFrame, rLevel } = radarItem
 
   return labelPosition.map((foo, i) => ({
     name: 'text',
+    index: rLevel,
     visible: radarItem.label.show,
     animationCurve,
     animationFrame,

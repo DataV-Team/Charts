@@ -106,6 +106,13 @@ export const legendConfig = {
     fill: '#999'
   },
   /**
+   * @description Legend render level
+   * Priority rendering high level
+   * @type {Number}
+   * @default rLevel = 20
+   */
+  rLevel: 20,
+  /**
    * @description Legend animation curve
    * @type {String}
    * @default animationCurve = 'easeOutCubic'

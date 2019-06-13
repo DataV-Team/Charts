@@ -22,13 +22,14 @@ export function title (chart, option = {}) {
 }
 
 function getTitleConfig (titleItem, updater) {
-  const { animationCurve, animationFrame } = titleConfig
+  const { animationCurve, animationFrame, rLevel } = titleConfig
 
   const shape = getTitleShape(titleItem, updater)
   const style = getTitleStyle(titleItem)
 
   return [{
     name: 'text',
+    index: rLevel,
     visible: titleItem.show,
     animationCurve,
     animationFrame,

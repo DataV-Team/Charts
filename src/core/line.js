@@ -46,7 +46,6 @@ export function line (chart, option = {}) {
     getGraphConfig: getPointConfig,
     getStartGraphConfig: getStartPointConfig
   })
-  getLabelConfig
 
   doUpdate({
     chart,
@@ -160,10 +159,11 @@ function getLineFillBottomPos (lineAxis) {
 }
 
 function getLineAreaConfig (lineItem) {
-  const { animationCurve, animationFrame, lineFillBottomPos } = lineItem
+  const { animationCurve, animationFrame, lineFillBottomPos, rLevel } = lineItem
 
   return [{
     name: getLineGraphName(lineItem),
+    index: rLevel,
     animationCurve,
     animationFrame,
     visible: lineItem.lineArea.show,
@@ -296,10 +296,11 @@ function beforeChangeLineAndArea (graph, config) {
 }
 
 function getLineConfig (lineItem) {
-  const { animationCurve, animationFrame } = lineItem
+  const { animationCurve, animationFrame, rLevel } = lineItem
 
   return [{
     name: getLineGraphName(lineItem),
+    index: rLevel + 1,
     animationCurve,
     animationFrame,
     shape: getLineAndAreaShape(lineItem),
@@ -351,7 +352,7 @@ function getStartLineConfig (lineItem) {
 }
 
 function getPointConfig (lineItem) {
-  const { animationCurve, animationFrame } = lineItem
+  const { animationCurve, animationFrame, rLevel } = lineItem
 
   const shapes = getPointShapes(lineItem)
 
@@ -359,6 +360,7 @@ function getPointConfig (lineItem) {
 
   return shapes.map(shape => ({
     name: 'circle',
+    index: rLevel + 2,
     visible: lineItem.linePoint.show,
     animationCurve,
     animationFrame,
@@ -394,13 +396,14 @@ function getStartPointConfig (lineItem) {
 }
 
 function getLabelConfig (lineItem) {
-  const { animationCurve, animationFrame } = lineItem
+  const { animationCurve, animationFrame, rLevel } = lineItem
 
   const shapes = getLabelShapes(lineItem)
   const style = getLabelStyle(lineItem)
 
   return shapes.map((shape, i) => ({
     name: 'text',
+    index: rLevel + 3,
     visible: lineItem.label.show,
     animationCurve,
     animationFrame,

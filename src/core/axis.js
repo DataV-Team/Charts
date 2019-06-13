@@ -518,10 +518,11 @@ function calcSplitLinePosition (allAxis, chart) {
 }
 
 function getLineConfig (axisItem) {
-  const { animationCurve, animationFrame } = axisItem
+  const { animationCurve, animationFrame, rLevel } = axisItem
 
   return [{
     name: 'polyline',
+    index: rLevel,
     visible: axisItem.axisLine.show,
     animationCurve,
     animationFrame,
@@ -543,13 +544,14 @@ function getLineStyle (axisItem) {
 }
 
 function getTickConfig (axisItem) {
-  const { animationCurve, animationFrame } = axisItem
+  const { animationCurve, animationFrame, rLevel } = axisItem
 
   const shapes = getTickShapes(axisItem)
   const style = getTickStyle(axisItem)
 
   return shapes.map(shape => ({
     name: 'polyline',
+    index: rLevel,
     visible: axisItem.axisTick.show,
     animationCurve,
     animationFrame,
@@ -569,13 +571,14 @@ function getTickStyle (axisItem) {
 }
 
 function getLabelConfig (axisItem) {
-  const { animationCurve, animationFrame } = axisItem
+  const { animationCurve, animationFrame, rLevel } = axisItem
 
   const shapes = getLabelShapes(axisItem)
   const style = getLabelStyle(axisItem)
 
   return shapes.map(shape => ({
     name: 'text',
+    index: rLevel,
     visible: axisItem.axisLabel.show,
     animationCurve,
     animationFrame,
@@ -638,10 +641,11 @@ function getAxisLabelRealAlign (position) {
 }
 
 function getNameConfig (axisItem) {
-  const { animationCurve, animationFrame } = axisItem
+  const { animationCurve, animationFrame, rLevel } = axisItem
 
   return [{
     name: 'text',
+    index: rLevel,
     animationCurve,
     animationFrame,
     shape: getNameShape(axisItem),
@@ -705,13 +709,14 @@ function getNameRealAlign (position, location) {
 }
 
 function getSplitLineConfig (axisItem) {
-  const { animationCurve, animationFrame } = axisItem
+  const { animationCurve, animationFrame, rLevel } = axisItem
 
   const shapes = getSplitLineShapes(axisItem)
   const style = getSplitLineStyle(axisItem)
 
   return shapes.map(shape => ({
     name: 'polyline',
+    index: rLevel,
     visible: axisItem.splitLine.show,
     animationCurve,
     animationFrame,

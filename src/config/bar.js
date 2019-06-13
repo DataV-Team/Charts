@@ -168,6 +168,13 @@ export const barConfig = {
    */
   barStyle: {},
   /**
+   * @description Bar chart render level
+   * Priority rendering high level
+   * @type {Number}
+   * @default rLevel = 0
+   */
+  rLevel: 0,
+  /**
    * @description Bar animation curve
    * @type {String}
    * @default animationCurve = 'easeOutCubic'

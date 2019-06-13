@@ -151,6 +151,13 @@ export const pieConfig = {
    */
   percentToFixed: 0,
   /**
+   * @description Pie chart render level
+   * Priority rendering high level
+   * @type {Number}
+   * @default rLevel = 10
+   */
+  rLevel: 10,
+  /**
    * @description Animation delay gap
    * @type {Number}
    * @default animationDelayGap = 60

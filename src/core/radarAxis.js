@@ -146,12 +146,13 @@ function calcRadarAxisLabelPosition (radarAxis) {
 }
 
 function getSplitAreaConfig (radarAxis) {
-  const { areaRadius, polygon, animationCurve, animationFrame } = radarAxis
+  const { areaRadius, polygon, animationCurve, animationFrame, rLevel } = radarAxis
 
   const name = polygon ? 'regPolygon' : 'ring'
 
   return areaRadius.map((foo, i) => ({
     name,
+    index: rLevel,
     visible: radarAxis.splitArea.show,
     animationCurve,
     animationFrame,
@@ -235,12 +236,13 @@ function beforeChangeSplitArea (graph, config) {
 }
 
 function getSplitLineConfig (radarAxis) {
-  const { ringRadius, polygon, animationCurve, animationFrame } = radarAxis
+  const { ringRadius, polygon, animationCurve, animationFrame, rLevel } = radarAxis
 
   const name = polygon ? 'regPolygon' : 'ring'
 
   return ringRadius.map((foo, i) => ({
     name,
+    index: rLevel,
     animationCurve,
     animationFrame,
     visible: radarAxis.splitLine.show,
@@ -313,10 +315,11 @@ function beforeChangeSplitLine (graph, config) {
 }
 
 function getAxisLineConfig (radarAxis) {
-  const { axisLinePosition, animationCurve, animationFrame } = radarAxis
+  const { axisLinePosition, animationCurve, animationFrame, rLevel } = radarAxis
 
   return axisLinePosition.map((foo, i) => ({
     name: 'polyline',
+    index: rLevel,
     visible: radarAxis.axisLine.show,
     animationCurve,
     animationFrame,
@@ -346,10 +349,11 @@ function getAxisLineStyle (radarAxis, i) {
 }
 
 function getAxisLabelConfig (radarAxis) {
-  const { axisLabelPosition, animationCurve, animationFrame } = radarAxis
+  const { axisLabelPosition, animationCurve, animationFrame, rLevel } = radarAxis
   
   return axisLabelPosition.map((foo, i) => ({
     name: 'text',
+    index: rLevel,
     visible: radarAxis.axisLabel.show,
     animationCurve,
     animationFrame,

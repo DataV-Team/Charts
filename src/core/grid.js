@@ -20,7 +20,7 @@ export function grid (chart, option = {}) {
 }
 
 function getGridConfig (gridItem, updater) {
-  const { animationCurve, animationFrame } = gridItem
+  const { animationCurve, animationFrame, rLevel } = gridItem
 
   const shape = getGridShape(gridItem, updater)
   const style = getGridStyle(gridItem)
@@ -29,6 +29,7 @@ function getGridConfig (gridItem, updater) {
 
   return [{
     name: 'rect',
+    index: rLevel,
     animationCurve,
     animationFrame,
     shape,

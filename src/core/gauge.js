@@ -333,10 +333,11 @@ function getOffsetedPoint ([x, y], [ox, oy]) {
 }
 
 function getAxisTickConfig (gaugeItem) {
-  const { tickPosition, animationCurve, animationFrame } = gaugeItem
+  const { tickPosition, animationCurve, animationFrame, rLevel } = gaugeItem
 
   return tickPosition.map((foo, i) => ({
     name: 'polyline',
+    index: rLevel,
     visible: gaugeItem.axisTick.show,
     animationCurve,
     animationFrame,
@@ -358,10 +359,11 @@ function getAxisTickStyle (gaugeItem, i) {
 }
 
 function getAxisLabelConfig (gaugeItem) {
-  const { labelPosition, animationCurve, animationFrame } = gaugeItem
+  const { labelPosition, animationCurve, animationFrame, rLevel } = gaugeItem
 
   return labelPosition.map((foo, i) => ({
     name: 'text',
+    index: rLevel,
     visible: gaugeItem.axisLabel.show,
     animationCurve,
     animationFrame,
@@ -388,10 +390,11 @@ function getAxisLabelStyle (gaugeItem, i) {
 }
 
 function getBackgroundArcConfig (gaugeItem) {
-  const { animationCurve, animationFrame } = gaugeItem
+  const { animationCurve, animationFrame, rLevel } = gaugeItem
 
   return [{
     name: 'arc',
+    index: rLevel,
     visible: gaugeItem.backgroundArc.show,
     animationCurve,
     animationFrame,
@@ -433,10 +436,11 @@ function getStartBackgroundArcConfig (gaugeItem) {
 }
 
 function getArcConfig (gaugeItem) {
-  const { data, animationCurve, animationFrame } = gaugeItem
+  const { data, animationCurve, animationFrame, rLevel } = gaugeItem
 
   return data.map((foo, i) => ({
     name: 'agArc',
+    index: rLevel,
     animationCurve,
     animationFrame,
     shape: getGaugeArcShape(gaugeItem, i),
@@ -486,10 +490,11 @@ function getStartArcConfig (gaugeItem) {
 }
 
 function getPointerConfig (gaugeItem) {
-  const { animationCurve, animationFrame, center } = gaugeItem
+  const { animationCurve, animationFrame, center, rLevel } = gaugeItem
 
   return [{
     name: 'polyline',
+    index: rLevel,
     visible: gaugeItem.pointer.show,
     animationCurve,
     animationFrame,
@@ -540,12 +545,13 @@ function getStartPointerConfig (gaugeItem) {
 }
 
 function getDetailsConfig (gaugeItem) {
-  const { detailsPosition, animationCurve, animationFrame } = gaugeItem
+  const { detailsPosition, animationCurve, animationFrame, rLevel } = gaugeItem
 
   const visible = gaugeItem.details.show
 
   return detailsPosition.map((foo, i) => ({
     name: 'numberText',
+    index: rLevel,
     visible,
     animationCurve,
     animationFrame,

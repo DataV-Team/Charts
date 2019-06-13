@@ -182,6 +182,13 @@ export const xAxisConfig = {
     }
   },
   /**
+   * @description X axis render level
+   * Priority rendering high level
+   * @type {Number}
+   * @default rLevel = -20
+   */
+  rLevel: -20,
+  /**
    * @description X axis animation curve
    * @type {String}
    * @default animationCurve = 'easeOutCubic'
@@ -378,6 +385,13 @@ export const yAxisConfig = {
       lineWidth: 1
     }
   },
+  /**
+   * @description Y axis render level
+   * Priority rendering high level
+   * @type {Number}
+   * @default rLevel = -20
+   */
+  rLevel: -20,
   /**
    * @description Y axis animation curve
    * @type {String}

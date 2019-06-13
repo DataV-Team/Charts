@@ -323,10 +323,11 @@ function calcDefaultVerticalPosition (legend, isRight) {
 }
 
 function getIconConfig (legendItem, updater) {
-  const { data, selectAble, animationCurve, animationFrame } = legendItem
+  const { data, selectAble, animationCurve, animationFrame, rLevel } = legendItem
 
   return data.map((item, i) => ({
     name: item.icon === 'line' ? 'lineIcon' : 'rect',
+    index: rLevel,
     visible: legendItem.show,
     hover: selectAble,
     click: selectAble,
@@ -364,10 +365,11 @@ function getIconStyle (legendItem, i) {
 }
 
 function getTextConfig (legendItem, updater) {
-  const { data, selectAble, animationCurve, animationFrame } = legendItem
+  const { data, selectAble, animationCurve, animationFrame, rLevel } = legendItem
 
   return data.map((foo, i) => ({
     name: 'text',
+    index: rLevel,
     visible: legendItem.show,
     hover: selectAble,
     animationCurve,

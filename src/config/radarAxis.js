@@ -149,6 +149,13 @@ export const radarAxisConfig = {
     style: {}
   },
   /**
+   * @description Bar chart render level
+   * Priority rendering high level
+   * @type {Number}
+   * @default rLevel = -10
+   */
+  rLevel: -10,
+  /**
    * @description Radar axis animation curve
    * @type {String}
    * @default animationCurve = 'easeOutCubic'

@@ -141,6 +141,13 @@ export const lineConfig = {
     }
   },
   /**
+   * @description Line chart render level
+   * Priority rendering high level
+   * @type {Number}
+   * @default rLevel = 10
+   */
+  rLevel: 10,
+  /**
    * @description Line animation curve
    * @type {String}
    * @default animationCurve = 'easeOutCubic'

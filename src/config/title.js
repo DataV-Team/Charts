@@ -30,6 +30,13 @@ export const titleConfig = {
     textBaseline: 'bottom'
   },
   /**
+   * @description Title render level
+   * Priority rendering high level
+   * @type {Number}
+   * @default rLevel = 20
+   */
+  rLevel: 20,
+  /**
    * @description Title animation curve
    * @type {String}
    * @default animationCurve = 'easeOutCubic'

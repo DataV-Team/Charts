@@ -347,13 +347,14 @@ function getValuePos (min, max, value, linePosition, axis) {
 }
 
 function getBackgroundBarConfig (barItem) {
-  const { animationCurve, animationFrame } = barItem
+  const { animationCurve, animationFrame, rLevel } = barItem
 
   const shapes = getBackgroundBarShapes(barItem)
   const style = getBackgroundBarStyle(barItem)
 
   return shapes.map(shape => ({
     name: 'rect',
+    index: rLevel,
     visible: barItem.backgroundBar.show,
     animationCurve,
     animationFrame,
@@ -405,12 +406,13 @@ function getBackgroundBarStyle (barItem) {
 }
 
 function getBarConfig (barItem) {
-  const { barLabelAxisPos, animationCurve, animationFrame } = barItem
+  const { barLabelAxisPos, animationCurve, animationFrame, rLevel } = barItem
 
   const name = getBarName(barItem)
 
   return barLabelAxisPos.map((foo, i) => ({
     name,
+    index: rLevel,
     animationCurve,
     animationFrame,
     shape: getBarShape(barItem, i),
@@ -650,13 +652,14 @@ function beforeUpdateBar (graphs, barItem, i, updater) {
 }
 
 function getLabelConfig (barItem) {
-  let { animationCurve, animationFrame } = barItem
+  let { animationCurve, animationFrame, rLevel } = barItem
 
   const shapes = getLabelShapes(barItem)
   const style = getLabelStyle(barItem)
 
   return shapes.map(shape => ({
     name: 'text',
+    index: rLevel,
     visible: barItem.label.show,
     animationCurve,
     animationFrame,
