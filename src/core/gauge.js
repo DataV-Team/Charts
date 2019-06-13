@@ -62,7 +62,8 @@ export function gauge (chart, option = {}) {
     series: gauges,
     key: 'gaugeArc',
     getGraphConfig: getArcConfig,
-    getStartGraphConfig: getStartArcConfig
+    getStartGraphConfig: getStartArcConfig,
+    beforeChange: beforeChangeArc
   })
 
   doUpdate({
@@ -487,6 +488,21 @@ function getStartArcConfig (gaugeItem) {
   })
 
   return configs
+}
+
+function beforeChangeArc (graph, config) {
+  const graphGradient = graph.style.gradient
+
+  const cacheNum = graphGradient.length
+  const needNum = config.style.gradient.length
+
+  if (cacheNum > needNum) {
+    graphGradient.splice(needNum)
+  } else {
+    const last = graphGradient.slice(-1)[0]
+
+    graphGradient.push(...new Array(needNum - cacheNum).fill(0).map(foo => [...last]))
+  }
 }
 
 function getPointerConfig (gaugeItem) {
