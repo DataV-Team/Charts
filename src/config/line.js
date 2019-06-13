@@ -6,6 +6,12 @@ export const lineConfig = {
    */
   show: true,
   /**
+   * @description Legend name
+   * @type {String}
+   * @default name = ''
+   */
+  name: '',
+  /**
    * @description Smooth line
    * @type {Boolean}
    * @default smooth = false
@@ -25,6 +31,13 @@ export const lineConfig = {
    * @example yAxisIndex = 0 | 1
    */
   yAxisIndex: 0,
+  /**
+   * @description Line chart data
+   * @type {Array}
+   * @default data = []
+   * @example data = [100, 200, 300]
+   */
+  data: [],
   /**
    * @description Line default style configuration
    * @type {Object}

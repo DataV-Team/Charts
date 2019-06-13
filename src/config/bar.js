@@ -6,6 +6,12 @@ export const barConfig = {
    */
   show: true,
   /**
+   * @description Legend name
+   * @type {String}
+   * @default name = ''
+   */
+  name: '',
+  /**
    * @description Bar shape type
    * @type {String}
    * @default shapeType = 'normal'
@@ -62,6 +68,13 @@ export const barConfig = {
    * @example yAxisIndex = 0 | 1
    */
   yAxisIndex: 0,
+  /**
+   * @description Bar chart data
+   * @type {Array}
+   * @default data = []
+   * @example data = [100, 200, 300]
+   */
+  data: [],
   /**
    * @description Background bar configuration
    * @type {Object}

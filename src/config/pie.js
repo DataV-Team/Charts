@@ -6,6 +6,12 @@ export const pieConfig = {
    */
   show: true,
   /**
+   * @description Legend name
+   * @type {String}
+   * @default name = ''
+   */
+  name: '',
+  /**
    * @description Radius of pie
    * @type {String|Number}
    * @default radius = '50%'
@@ -45,6 +51,12 @@ export const pieConfig = {
    * @example roseIncrement = 'auto' | '10%' | 10
    */
   roseIncrement: 'auto',
+  /**
+   * @description Pie chart data
+   * @type {Array}
+   * @default data = []
+   */
+  data: [],
   /**
    * @description Pie inside label configuration
    * @type {Object}

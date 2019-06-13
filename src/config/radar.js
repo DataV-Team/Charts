@@ -6,6 +6,19 @@ export const radarConfig = {
    */
   show: true,
   /**
+   * @description Legend name
+   * @type {String}
+   * @default name = ''
+   */
+  name: '',
+  /**
+   * @description Radar chart data
+   * @type {Array}
+   * @default data = []
+   * @example data = [100, 200, 300]
+   */
+  data: [],
+  /**
    * @description Radar default style configuration
    * @type {Object}
    * @default style = {Configuration Of Class Style}
