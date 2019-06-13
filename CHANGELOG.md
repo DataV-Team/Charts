@@ -1,3 +1,9 @@
+# 0.2.0-alpha (2019-06-13)
+
+### New
+
+- **legend:** Add legend extend.
+
 # 0.1.3-alpha (2019-06-11)
 
 ### Bug Fixes
