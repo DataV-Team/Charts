@@ -12,6 +12,14 @@ export const lineConfig = {
    */
   name: '',
   /**
+   * @description Data stacking
+   * The data value of the series element of the same stack
+   * will be superimposed (the latter value will be superimposed on the previous value)
+   * @type {String}
+   * @default stack = ''
+   */
+  stack: '',
+  /**
    * @description Smooth line
    * @type {Boolean}
    * @default smooth = false
