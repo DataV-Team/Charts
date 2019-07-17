@@ -28,7 +28,8 @@
   "homepage": "https://github.com/jiaming743/charts#readme",
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
-    "@jiaminghi/c-render": "*"
+    "@jiaminghi/c-render": "*",
+    "core-js": "^3.1.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
