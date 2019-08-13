@@ -1,3 +1,5 @@
+[ENGLISH](./README_EN.md)
+
 <h1 align="center">Charts</h1>
 
 <p align="center">
@@ -9,22 +11,22 @@
     </a>
 </p>
 
-### What is Charts?
+### Charts是干什么的?
 
-- It is a `lightweight` chart library based on canvas.
+- 它是一个基于**canvas**的`轻量`.
 
-### Provides
+### 支持
 
-* `line`
-* `bar`
-* `pie`
-* `radar`
-* `gauge`
+* `折线图`
+* `柱状图`
+* `饼状图`
+* `雷达图`
+* `仪表盘`
 
-### Install with npm
+### npm安装
 
 ```shell
 $ npm install @jiaminghi/charts
 ```
 
-Detailed documents and examples can be viewed on the [HomePage](http://charts.jiaminghi.com).
+详细文档及示例请移步[HomePage](http://charts.jiaminghi.com).
