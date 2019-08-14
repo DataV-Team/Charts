@@ -29,4 +29,19 @@
 $ npm install @jiaminghi/charts
 ```
 
+### 使用
+
+```javascript
+import Charts from '@jiaminghi/charts'
+
+const container = document.getElementById('container')
+
+const myChart = new Charts(container)
+
+myChart.setOption({
+  title: 'My Chart',
+  // ...otherConfig
+})
+```
+
 详细文档及示例请移步[HomePage](http://charts.jiaminghi.com).
