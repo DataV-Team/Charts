@@ -1,3 +1,9 @@
+# 0.2.3-alpha (2019-08-28)
+
+### Bug Fixes
+
+- **deepMerge:** deepMerge method cannot merge `Array` when recursive.
+
 # 0.2.2-alpha (2019-06-13)
 
 ### Bug Fixes
