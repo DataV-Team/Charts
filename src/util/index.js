@@ -1,10 +1,10 @@
 import { deepClone } from '@jiaminghi/c-render/lib/plugin/util'
 
-export function filterNonNumber(array) {
+export function filterNonNumber (array) {
   return array.filter(n => typeof n === 'number')
 }
 
-export function deepMerge(target, merged) {
+export function deepMerge (target, merged) {
   for (var key in merged) {
     target[key] = target[key] && typeof target[key] === 'object' ?
       deepMerge(target[key], merged[key]) : target[key] = merged[key]
@@ -13,13 +13,13 @@ export function deepMerge(target, merged) {
   return target
 }
 
-export function mulAdd(nums) {
+export function mulAdd (nums) {
   nums = filterNonNumber(nums)
 
   return nums.reduce((all, num) => all + num, 0)
 }
 
-export function mergeSameStackData(item, series) {
+export function mergeSameStackData (item, series) {
   const stack = item.stack
 
   if (!stack) return [...item.data]
@@ -37,7 +37,7 @@ export function mergeSameStackData(item, series) {
     .map((foo, i) => mulAdd(datas.map(d => d[i])))
 }
 
-export function getTwoPointDistance(pointOne, pointTwo) {
+export function getTwoPointDistance (pointOne, pointTwo) {
   const minusX = Math.abs(pointOne[0] - pointTwo[0])
 
   const minusY = Math.abs(pointOne[1] - pointTwo[1])
