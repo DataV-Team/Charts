@@ -6,7 +6,7 @@ export function filterNonNumber(array) {
 
 export function deepMerge(target, merged) {
   for (var key in merged) {
-    target[key] = target[key] && target[key].toString() === "[object Object]" ?
+    target[key] = target[key] && typeof target[key] === 'object' ?
       deepMerge(target[key], merged[key]) : target[key] = merged[key]
   }
 
