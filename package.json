@@ -1,6 +1,6 @@
 {
   "name": "@jiaminghi/charts",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "author": "JiaMing <743192023@qq.com>",
   "description": "Lightweight charting",
   "main": "lib/index.js",
@@ -9,8 +9,9 @@
     "url": "https://github.com/jiaming743/charts.git"
   },
   "scripts": {
-    "compile": "babel -d lib/ src/",
-    "prepublish": "npm run compile",
+    "build": "node build/index.js",
+    "prepublish": "npm run build",
+    "deploy": "node deploy/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "license": "MIT",
@@ -28,11 +29,19 @@
   "homepage": "https://github.com/jiaming743/charts#readme",
   "dependencies": {
     "@jiaminghi/c-render": "*",
-    "core-js": "^3.1.4"
+    "@babel/runtime": "^7.5.5"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
-    "@babel/preset-env": "^7.4.5"
+    "@babel/preset-env": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.5.5",
+    "@babel/register": "^7.4.4",
+    "@jiaminghi/fs": "0.0.2",
+    "chai": "^4.2.0",
+    "ftp": "^0.3.10",
+    "mocha": "^6.1.4",
+    "browserify": "^16.5.0",
+    "uglifyjs": "^2.4.11"
   }
 }
