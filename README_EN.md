@@ -45,3 +45,17 @@ myChart.setOption({
 ```
 
 Detailed documents and examples can be viewed on the [HomePage](http://charts.jiaminghi.com).
+
+### Quick experience
+
+```html
+<!--Resources are located on personal servers for experience and testing only, do not use in production environments-->
+<!--Debug version-->
+<script src="http://lib.jiaminghi.com/charts/charts.map.js"></script>
+<!--Compression version-->
+<script src="http://lib.jiaminghi.com/charts/charts.min.js"></script>
+<script>
+  const Charts = window.Charts.default
+  // do something
+</script>
+```
