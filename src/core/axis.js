@@ -197,12 +197,12 @@ function getSeriesMinMaxValue (series) {
 
   const minValue = Math.min(
     ...series
-      .map(({ data }) => min(...filterNonNumber(data)))
+      .map(({ data }) => Math.min(...filterNonNumber(data)))
   )
 
   const maxValue = Math.max(
     ...series
-      .map(({ data }) => max(...filterNonNumber(data)))
+      .map(({ data }) => Math.max(...filterNonNumber(data)))
   )
 
   return [minValue, maxValue]
