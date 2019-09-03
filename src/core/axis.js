@@ -195,12 +195,12 @@ function getValueAxisMaxMinValue (axis, series) {
 function getSeriesMinMaxValue (series) {
   if (!series) return
 
-  const minValue = min(
+  const minValue = Math.min(
     ...series
       .map(({ data }) => min(...filterNonNumber(data)))
   )
 
-  const maxValue = max(
+  const maxValue = Math.max(
     ...series
       .map(({ data }) => max(...filterNonNumber(data)))
   )
