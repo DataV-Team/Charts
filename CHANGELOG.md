@@ -1,3 +1,9 @@
+# 0.2.6-alpha (2019-09-03)
+
+### Perfect
+
+- **axis:** Optimize irregular syntax.
+
 # 0.2.5-alpha (2019-08-29)
 
 ### Perfect
