@@ -6,7 +6,7 @@
   "main": "lib/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jiaming743/charts.git"
+    "url": "https://github.com/DataV-Team/charts.git"
   },
   "scripts": {
     "build": "node build/index.js",
@@ -16,7 +16,7 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jiaming743/charts/issues"
+    "url": "https://github.com/DataV-Team/charts/issues"
   },
   "keywords": [
     "canvas",
@@ -26,7 +26,7 @@
     "radar",
     "pie"
   ],
-  "homepage": "https://github.com/jiaming743/charts#readme",
+  "homepage": "https://github.com/DataV-Team/charts#readme",
   "dependencies": {
     "@jiaminghi/c-render": "*",
     "@babel/runtime": "^7.5.5"
