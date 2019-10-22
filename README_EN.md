@@ -3,8 +3,8 @@
 <h1 align="center">Charts</h1>
 
 <p align="center">
-    <a href="https://github.com/jiaming743/charts/blob/master/LICENSE">
-        <img src="https://img.shields.io/github/license/jiaming743/charts.svg" alt="LICENSE" />
+    <a href="https://github.com/DataV-Team/charts/blob/master/LICENSE">
+        <img src="https://img.shields.io/github/license/DataV-Team/charts.svg" alt="LICENSE" />
     </a>
     <a href="https://www.npmjs.com/package/@jiaminghi/charts">
         <img src="https://img.shields.io/npm/v/@jiaminghi/charts.svg" alt="LICENSE" />
