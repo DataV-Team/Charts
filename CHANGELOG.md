@@ -1,3 +1,19 @@
+# 0.2.8-alpha (2019-10-23)
+
+### Perfect
+
+- **setOption:** **setOption** adds the `animationEnd` parameter which skips unfinished animation when updating the chart state. It is recommended to enable animationEnd when frequently updating the chart state (frequently updating the chart state may cause the animation data to continue to grow and cause memory leaks).
+  ```javascript
+  /**
+   * @description Set chart option
+   * @param {Object} option Chart option
+   * @param {Boolean} animationEnd Execute animationEnd
+   * @return {Undefined} No return
+   */
+  Charts.prototype.setOption = function (option, animationEnd = false) {
+  }
+  ```
+
 # 0.2.7-alpha (2019-09-03)
 
 ### Perfect
