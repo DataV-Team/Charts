@@ -39,14 +39,17 @@ export default class Charts {
 /**
  * @description Set chart option
  * @param {Object} option Chart option
+ * @param {Boolean} animationEnd Execute animationEnd
  * @return {Undefined} No return
  */
-Charts.prototype.setOption = function (option) {
+Charts.prototype.setOption = function (option, animationEnd = false) {
   if (!option || typeof option !== 'object') {
     console.error('setOption Missing parameters!')
 
     return false
   }
+
+  if (animationEnd) this.render.graphs.forEach(graph => graph.animationEnd())
 
   const optionCloned = deepClone(option, true)
 
