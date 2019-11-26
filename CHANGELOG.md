@@ -1,3 +1,36 @@
+# 0.2.9-alpha (2019-11-26)
+
+### Perfect
+
+- **Bar:** Bar supports independent color, each bar can be set in different colors.
+  ```javascript
+  const config = {
+    someConfig,
+    series: [
+      {
+        type: 'bar',
+        /**
+         * @description Independent color mode
+         * When set to true, independent color mode is enabled
+         * @type {Boolean}
+         * @default independentColor = false
+         */
+        independentColor: true,
+        /**
+         * @description Independent colors
+         * Only effective when independent color mode is enabled
+         * Default value is the same as the color in the root configuration
+         * Two-dimensional color array can produce gradient colors
+         * @type {Array}
+         * @example independentColor = ['#fff', '#000']
+         * @example independentColor = [['#fff', '#000'], '#000']
+         */
+        independentColors: [],
+      }
+    ]
+  }
+  ```
+
 # 0.2.8-alpha (2019-10-24)
 
 ### Perfect
