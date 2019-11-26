@@ -176,6 +176,20 @@ export const barConfig = {
    */
   barStyle: {},
   /**
+   * @description Independent color for each bar
+   * @type {Boolean}
+   * @default independentColor = false
+   */
+  independentColor: false,
+  /**
+   * @description Independent colors
+   * @type {Array}
+   * @default independentColor = []
+   * @example independentColor = ['#fff', '#000']
+   * @example independentColor = [['#fff', '#000'], '#000']
+   */
+  independentColors: [],
+  /**
    * @description Bar chart render level
    * Priority rendering high level
    * @type {Number}

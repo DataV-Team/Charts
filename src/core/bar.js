@@ -526,11 +526,17 @@ function getNormalBarShape (barItem, i) {
 }
 
 function getBarStyle (barItem, i) {
-  const { barStyle, gradient, color } = barItem
+  const { barStyle, gradient, color, independentColor, independentColors } = barItem
 
   const fillColor = [barStyle.fill || color]
 
-  const gradientColor = deepMerge(fillColor, gradient.color)
+  let gradientColor = deepMerge(fillColor, gradient.color)
+
+  if (independentColor) {
+    const idtColor = independentColors[i % independentColors.length]
+
+    gradientColor = idtColor instanceof Array ? idtColor : [idtColor]
+  }
 
   if (gradientColor.length === 1) gradientColor.push(gradientColor[0])
 

@@ -32,4 +32,13 @@ export function mergeColor (chart, option = {}) {
   const gauges = series.filter(({ type }) => type === 'gauge')
 
   gauges.forEach(gauge => gauge.data.forEach((di, i) => (di.color = color[i % colorNum])))
+
+  const barWithIndependentColor = series
+    .filter(({ type, independentColor }) => type === 'bar' && independentColor)
+
+  barWithIndependentColor.forEach(bar => {
+    if (bar.independentColors) return
+
+    bar.independentColors = color
+  })
 }
