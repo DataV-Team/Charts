@@ -185,7 +185,7 @@ function calcPiesPercent (pies) {
 
     const percentSumNoLast = mulAdd(data.slice(0, -1).map(({ percent }) => percent))
 
-    data.slice(-1)[0].percent = 100 - percentSumNoLast
+    data.slice(-1)[0].percent = parseFloat((100 - percentSumNoLast).toFixed(percentToFixed))
   })
 
   return pies
