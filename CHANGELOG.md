@@ -1,3 +1,9 @@
+# 0.2.10-alpha (2019-12-25)
+
+### Bug Fixes
+
+- **Pie:** `PercentToFixed` exception display.
+
 # 0.2.9-alpha (2019-11-26)
 
 ### Perfect
