@@ -6,8 +6,19 @@ export function filterNonNumber (array) {
 
 export function deepMerge (target, merged) {
   for (var key in merged) {
-    target[key] = target[key] && typeof target[key] === 'object' ?
-      deepMerge(target[key], merged[key]) : target[key] = merged[key]
+    if (target[key] && typeof target[key] === 'object') {
+      deepMerge(target[key], merged[key])
+
+      continue
+    }
+
+    if (typeof merged[key] === 'object') {
+      target[key] = deepClone(merged[key], true)
+
+      continue
+    }
+
+    target[key] = merged[key]
   }
 
   return target
