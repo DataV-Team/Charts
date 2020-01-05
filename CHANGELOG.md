@@ -1,3 +1,9 @@
+# 0.2.11-alpha (2020-01-05)
+
+### Bug Fixes
+
+- **util->deepMerge:** Object property references are the same in some cases.
+
 # 0.2.10-alpha (2019-12-25)
 
 ### Bug Fixes
