@@ -1,3 +1,9 @@
+# 0.2.12-alpha (2020-01-15)
+
+### Perfect
+
+- **Pie:** Optimized percentage accuracy calculation.
+
 # 0.2.11-alpha (2020-01-05)
 
 ### Bug Fixes
