@@ -180,15 +180,27 @@ function calcPiesPercent (pies) {
     data.forEach(item => {
       const { value } = item
 
-      item.percent = parseFloat((value / sum * 100).toFixed(percentToFixed))
+      item.percent = toFixedNoCeil(value / sum * 100, percentToFixed)
     })
 
     const percentSumNoLast = mulAdd(data.slice(0, -1).map(({ percent }) => percent))
 
-    data.slice(-1)[0].percent = parseFloat((100 - percentSumNoLast).toFixed(percentToFixed))
+    data.slice(-1)[0].percent = toFixedNoCeil(100 - percentSumNoLast, percentToFixed)
   })
 
   return pies
+}
+
+function toFixedNoCeil (number, toFixed = 0) {
+  const stringNumber = number.toString()
+
+  const splitedNumber = stringNumber.split('.')
+  const decimal = splitedNumber[1] || '0'
+  const fixedDecimal = decimal.slice(0, toFixed)
+
+  splitedNumber[1] = fixedDecimal
+
+  return parseFloat(splitedNumber.join('.'))
 }
 
 function getDataSum (data) {
