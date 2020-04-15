@@ -1,3 +1,9 @@
+# 0.2.13-alpha (2020-04-15)
+
+### Perfect
+
+- **Axis:** Perfect axis calculation of min & max.
+
 # 0.2.12-alpha (2020-01-15)
 
 ### Perfect
