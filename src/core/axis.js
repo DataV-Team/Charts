@@ -149,9 +149,7 @@ function calcValueAxisLabelData (valueAxis, series) {
 
     let label = []
 
-    if (minMaxValue[0] === minMaxValue[1]) {
-      label = minMaxValue
-    } else if (min < 0 && max > 0) {
+    if (min < 0 && max > 0) {
       label = getValueAxisLabelFromZero(min, max, interval)
     } else {
       label = getValueAxisLabelFromMin(min, max, interval)
