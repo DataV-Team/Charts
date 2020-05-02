@@ -1,3 +1,9 @@
+# 0.2.14-alpha (2020-05-02)
+
+### Perfect
+
+- **numberText:** Graph of numberText support `\n` to **line feed**.
+
 # 0.2.13-alpha (2020-04-15)
 
 ### Perfect
