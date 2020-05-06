@@ -1,3 +1,9 @@
+# 0.2.15-alpha (2020-05-06)
+
+### Perfect
+
+- **pie:** Optimization percent calculation.
+
 # 0.2.14-alpha (2020-05-02)
 
 ### Perfect
