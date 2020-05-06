@@ -180,12 +180,14 @@ function calcPiesPercent (pies) {
     data.forEach(item => {
       const { value } = item
 
-      item.percent = toFixedNoCeil(value / sum * 100, percentToFixed)
+      item.percent = value / sum * 100
+      item.percentForLabel = toFixedNoCeil(value / sum * 100, percentToFixed)
     })
 
     const percentSumNoLast = mulAdd(data.slice(0, -1).map(({ percent }) => percent))
 
-    data.slice(-1)[0].percent = toFixedNoCeil(100 - percentSumNoLast, percentToFixed)
+    data.slice(-1)[0].percent = 100 - percentSumNoLast
+    data.slice(-1)[0].percentForLabel = toFixedNoCeil(100 - percentSumNoLast, percentToFixed)
   })
 
   return pies
@@ -446,7 +448,7 @@ function getInsideLabelShape (pieItem, i) {
 
   if (formatterType === 'string') {
     label = formatter.replace('{name}', dataItem.name)
-    label = label.replace('{percent}', dataItem.percent)
+    label = label.replace('{percent}', dataItem.percentForLabel)
     label = label.replace('{value}', dataItem.value)
   }
 
@@ -543,7 +545,7 @@ function getOutsideLabelShape (pieItem, i) {
 
   const { formatter } = outsideLabel
 
-  const { labelLine, name, percent, value } = data[i]
+  const { labelLine, name, percentForLabel, value } = data[i]
 
   const formatterType = typeof formatter
 
@@ -551,7 +553,7 @@ function getOutsideLabelShape (pieItem, i) {
 
   if (formatterType === 'string') {
     label = formatter.replace('{name}', name)
-    label = label.replace('{percent}', percent)
+    label = label.replace('{percent}', percentForLabel)
     label = label.replace('{value}', value)
   }
 
