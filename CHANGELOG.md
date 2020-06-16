@@ -1,3 +1,9 @@
+# 0.2.16-alpha (2020-06-16)
+
+### Perfect
+
+- **numberText:** Add number formatter.
+
 # 0.2.15-alpha (2020-05-06)
 
 ### Perfect
