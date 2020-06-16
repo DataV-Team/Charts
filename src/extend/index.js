@@ -135,7 +135,9 @@ const numberText = {
     number: [],
     content: '',
     position: [0, 0],
-    toFixed: 0
+    toFixed: 0,
+    rowGap: 0,
+    formatter: null
   },
 
   validator ({ shape }) {
@@ -152,25 +154,25 @@ const numberText = {
   },
 
   draw ({ ctx }, { shape }) {
-    const { number, content, toFixed, rowGap } = shape
+    const { number, content, toFixed, rowGap, formatter } = shape
 
     const textSegments = content.split('{nt}')
-
-    const lastSegmentIndex = textSegments.length - 1
 
     let textString = ''
 
     textSegments.forEach((t, i) => {
-      let currentNumber = number[i]
+      let currentNumber = number[i] || ''
 
-      if (i === lastSegmentIndex) currentNumber = ''
+      if (typeof currentNumber === 'number') {
+        currentNumber = currentNumber.toFixed(toFixed)
 
-      if (typeof currentNumber === 'number') currentNumber = currentNumber.toFixed(toFixed)
+        if (typeof formatter === 'function') currentNumber = formatter(currentNumber)
+      }
 
       textString += t + (currentNumber || '')
     })
 
-    text.draw({ ctx }, { shape: { ...shape, content: textString, rowGap: rowGap || 0 } })
+    text.draw({ ctx }, { shape: { ...shape, content: textString, rowGap } })
   }
 }
 
