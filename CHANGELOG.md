@@ -1,3 +1,9 @@
+# 0.2.17-alpha (2020-07-02)
+
+### Bug Fixes
+
+- **numberText:** Fix: When rendering, 0 is ignored.
+
 # 0.2.16-alpha (2020-06-16)
 
 ### Perfect
