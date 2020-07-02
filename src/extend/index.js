@@ -161,7 +161,8 @@ const numberText = {
     let textString = ''
 
     textSegments.forEach((t, i) => {
-      let currentNumber = number[i] || ''
+      let currentNumber = number[i]
+      if (typeof currentNumber !== 'number') currentNumber = ''
 
       if (typeof currentNumber === 'number') {
         currentNumber = currentNumber.toFixed(toFixed)
