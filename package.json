@@ -29,7 +29,7 @@
     "build:docs": "vuepress build docs",
     "deploy": "ts-node scripts/deploy.ts"
   },
-  "husky": {
+  "husky-": {
     "hooks": {
       "pre-commit": "npm run check",
       "pre-push": "npm run check"
