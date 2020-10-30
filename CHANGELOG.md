@@ -1,3 +1,9 @@
+# 0.2.18-alpha (2020-10-30)
+
+### Lock Dependencies
+
+- **@jiaminghi/c-render:** lock `^0.4.3`.
+
 # 0.2.17-alpha (2020-07-02)
 
 ### Bug Fixes
