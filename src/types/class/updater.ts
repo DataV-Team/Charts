@@ -12,7 +12,7 @@ export type UpdaterConfig = {
   /**
    * @description Graph Constructor
    */
-  GraphConstructor: new (config: GraphConfig) => Graph
+  getGraphConstructor: GetGraphConstructor
 
   /**
    * @description Updater target key
@@ -28,31 +28,26 @@ export type UpdaterConfig = {
   /**
    * @description Get graph config
    */
-  // eslint-disable-next-line
   getGraphConfig: GetGraphConfig
 
   /**
    * @description Get graph start config
    */
-  // eslint-disable-next-line
   getStartGraphConfig?: GetGraphConfig
 
   /**
    * @description Before change hook
    */
-  // eslint-disable-next-line
   beforeChange?: BeforeChange
 
   /**
    * @description Before update hook
    */
-  // eslint-disable-next-line
   beforeUpdate?: BeforeUpdate
 
   /**
    * @description After add hook
    */
-  // eslint-disable-next-line
   afterAddGraph?: AfterAddGraph
 }
 
@@ -60,10 +55,20 @@ export type UpdaterConfig = {
 export type BeforeChange = (graph: Graph, graphConfig: any, updater: Updater) => any
 
 // eslint-disable-next-line
-export type BeforeUpdate = (graph: Graph[], seriesConfigItem: any, updater: Updater) => any
+export type BeforeUpdate = (
+  graph: Graph[],
+  // eslint-disable-next-line
+  seriesConfigItem: any,
+  i: number,
+  updater: Updater
+  // eslint-disable-next-line
+) => any
 
 // eslint-disable-next-line
 export type AfterAddGraph = (graph: Graph[], seriesConfigItem: any, updater: Updater) => any
 
 // eslint-disable-next-line
 export type GetGraphConfig = (data: any, updater: Updater) => GraphConfig[]
+
+// eslint-disable-next-line
+export type GetGraphConstructor = (seriesConfigItem: any) => new (config: GraphConfig) => Graph

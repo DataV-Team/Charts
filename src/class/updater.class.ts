@@ -5,6 +5,7 @@ import {
   BeforeChange,
   BeforeUpdate,
   AfterAddGraph,
+  GetGraphConstructor,
 } from '../types/class/updater'
 import { Graph } from '@jiaminghi/c-render'
 import { GraphConfig } from '@jiaminghi/c-render/es/types/core/graph'
@@ -16,9 +17,9 @@ export class Updater {
   charts!: Charts
 
   /**
-   * @description Graph Constructor
+   * @description Get Graph Constructor
    */
-  GraphConstructor!: typeof Graph
+  getGraphConstructor!: GetGraphConstructor
 
   /**
    * @description Updater target key
@@ -85,11 +86,11 @@ export class Updater {
     if (!seriesConfig.length) return
 
     seriesConfig.forEach((seriesConfigItem, i) => {
-      beforeUpdate?.(graphs[i], seriesConfigItem, this)
+      beforeUpdate?.(graphs[i] || [], seriesConfigItem, i, this)
 
       const cacheGraphs = graphs[i]
 
-      if (cacheGraphs.length) {
+      if (cacheGraphs?.length) {
         this.changeGraphs(cacheGraphs, seriesConfigItem)
       } else {
         this.addGraphs(seriesConfigItem, i)
@@ -179,23 +180,25 @@ export class Updater {
       getStartGraphConfig,
       charts: { render },
       graphs,
-      GraphConstructor,
+      getGraphConstructor,
       afterAddGraph,
     } = this
+
+    const Constructor = getGraphConstructor(seriesConfigItem)
 
     const startConfigs = getStartGraphConfig?.(seriesConfigItem, this)
     const configs = getGraphConfig(seriesConfigItem, this)
     if (!configs.length) return
 
     if (startConfigs) {
-      const willAddGraphs = startConfigs.map(_ => new GraphConstructor(_))
+      const willAddGraphs = startConfigs.map(_ => new Constructor(_))
 
       graphs[index] = willAddGraphs
       render.add(willAddGraphs, true)
 
       willAddGraphs.forEach((graph, i) => this.updateGraphConfigByKey(graph, configs[i]))
     } else {
-      const willAddGraphs = configs.map(_ => new GraphConstructor(_))
+      const willAddGraphs = configs.map(_ => new Constructor(_))
 
       graphs[index] = willAddGraphs
       render.add(willAddGraphs, true)

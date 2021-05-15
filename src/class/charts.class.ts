@@ -2,10 +2,9 @@ import CRender from '@jiaminghi/c-render'
 import { deepClone } from '../utils/common'
 import { Option, GraphSeriesItem } from '../types/class/charts'
 
-import grid from '../core/grid'
+import { grid, axis, line, bar } from '../core/index'
 import { RectShape } from '@jiaminghi/c-render/es/types/graphs/shape'
 import { _AxisConfig } from '../types/config/axis'
-import { axis } from '../core/axis'
 import { initOption } from '../utils/core'
 
 export default class Charts {
@@ -77,6 +76,10 @@ export default class Charts {
     grid(this, optionCloned)
 
     axis(this, optionCloned)
+
+    line(this, optionCloned)
+
+    bar(this, optionCloned)
 
     this.option = option
 

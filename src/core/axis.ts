@@ -14,10 +14,11 @@ import { Option, OptionSeriesItem } from '../types/class/charts'
 import { getDefaultConfig } from '../config'
 import { LineConfig } from '../types/config/line'
 import { BarConfig } from '../types/config/bar'
-import { LineCoordinate, PointCoordinate, GraphStyleConfig } from '../types/common'
+import { LineCoordinate, PointCoordinate, GraphStyleConfig, DeepPartial } from '../types/common'
 import { doUpdate } from '../utils/updater'
 import { Polyline, Text } from '@jiaminghi/c-render'
 import { TextShape } from '@jiaminghi/c-render/es/types/graphs/shape'
+import { AxisKey } from '../types/core/axis'
 
 const axisDefaultConfig = {
   x: getDefaultConfig('xAxis'),
@@ -25,10 +26,10 @@ const axisDefaultConfig = {
 }
 
 function getAllAxis(
-  xAxis: Partial<XAxisConfig> | Partial<XAxisConfig>[],
-  yAxis: Partial<YAxisConfig> | Partial<YAxisConfig>[]
-): Partial<_AxisConfig>[] {
-  const [allXAxis, allYAxis]: [Partial<XAxisConfig>[], Partial<YAxisConfig>[]] = [[], []]
+  xAxis: DeepPartial<XAxisConfig> | DeepPartial<XAxisConfig>[],
+  yAxis: DeepPartial<YAxisConfig> | DeepPartial<YAxisConfig>[]
+): DeepPartial<_AxisConfig>[] {
+  const [allXAxis, allYAxis]: [DeepPartial<XAxisConfig>[], DeepPartial<YAxisConfig>[]] = [[], []]
 
   if (Array.isArray(xAxis)) {
     allXAxis.push(...xAxis)
@@ -46,10 +47,10 @@ function getAllAxis(
   allYAxis.splice(2)
 
   const addAxisExtendAttr = (
-    axis: Partial<AxisConfig>,
+    axis: DeepPartial<AxisConfig>,
     index: number,
     axisType: AxisType
-  ): Partial<_AxisConfig> => ({
+  ): DeepPartial<_AxisConfig> => ({
     ...axis,
     index,
     axis: axisType,
@@ -67,12 +68,12 @@ function getAllAxis(
   })
 
   return [
-    ...allXAxis.map<Partial<_AxisConfig>>((axis, i) => addAxisExtendAttr(axis, i, 'x')),
-    ...allYAxis.map<Partial<_AxisConfig>>((axis, i) => addAxisExtendAttr(axis, i, 'y')),
+    ...allXAxis.map<DeepPartial<_AxisConfig>>((axis, i) => addAxisExtendAttr(axis, i, 'x')),
+    ...allYAxis.map<DeepPartial<_AxisConfig>>((axis, i) => addAxisExtendAttr(axis, i, 'y')),
   ]
 }
 
-function mergeDefaultAxisConfig(allAxis: Partial<_AxisConfig>[]): _AxisConfig[] {
+function mergeDefaultAxisConfig(allAxis: DeepPartial<_AxisConfig>[]): _AxisConfig[] {
   const xAxis = allAxis.filter(({ axis }) => axis === 'x')
   const yAxis = allAxis.filter(({ axis }) => axis === 'y')
 
@@ -102,7 +103,7 @@ function mergeDefaultBoundaryGap(allAxis: _AxisConfig[]): _AxisConfig[] {
   ]
 }
 
-function mergeStackData(series: Partial<OptionSeriesItem>[]): Partial<OptionSeriesItem>[] {
+function mergeStackData(series: DeepPartial<OptionSeriesItem>[]): DeepPartial<OptionSeriesItem>[] {
   const seriesCloned = deepClone(series)
 
   const lineAndBarSeries = seriesCloned.filter(({ type }) => {
@@ -116,7 +117,7 @@ function mergeStackData(series: Partial<OptionSeriesItem>[]): Partial<OptionSeri
   return seriesCloned
 }
 
-function getSeriesMinMaxValue(series: Partial<OptionSeriesItem>[]): [number, number] {
+function getSeriesMinMaxValue(series: DeepPartial<OptionSeriesItem>[]): [number, number] {
   const minValue = Math.min(...series.map(({ data }) => Math.min(...filterNonNumber(data!))))
 
   const maxValue = Math.max(...series.map(({ data }) => Math.max(...filterNonNumber(data!))))
@@ -126,7 +127,7 @@ function getSeriesMinMaxValue(series: Partial<OptionSeriesItem>[]): [number, num
 
 function getValueAxisMaxMinValue(
   axis: _AxisConfig,
-  series: Partial<OptionSeriesItem>[]
+  series: DeepPartial<OptionSeriesItem>[]
 ): [number, number] {
   series = series.filter(({ show, type }) => {
     return (show = true && (type === 'line' || type === 'bar'))
@@ -275,7 +276,7 @@ function getAfterFormatterLabel(
 
 function calcValueAxisLabelData(
   valueAxis: _AxisConfig[],
-  series: Partial<OptionSeriesItem>[]
+  series: DeepPartial<OptionSeriesItem>[]
 ): _AxisConfig[] {
   return valueAxis.map(axis => {
     const minMaxValue = getValueAxisMaxMinValue(axis, series)
@@ -323,7 +324,7 @@ function calcLabelAxisLabelData(labelAxis: _AxisConfig[]) {
 
 function calcAxisLabelData(
   allAxis: _AxisConfig[],
-  series: Partial<OptionSeriesItem>[]
+  series: DeepPartial<OptionSeriesItem>[]
 ): _AxisConfig[] {
   let valueAxis = allAxis.filter(({ data }) => data === 'value')
   let labelAxis = allAxis.filter(({ data }) => Array.isArray(data))
@@ -771,7 +772,7 @@ function getSplitLineConfig(axisItem: _AxisConfig) {
   }))
 }
 
-export function axis(charts: Charts, option: Option): void {
+export default function axis(charts: Charts, option: Option): void {
   let { xAxis, yAxis, series } = option
 
   let allAxis: _AxisConfig[] = []
@@ -801,41 +802,41 @@ export function axis(charts: Charts, option: Option): void {
   doUpdate({
     charts,
     seriesConfig: allAxis,
-    key: 'axisLine',
+    key: AxisKey.AxisLine,
     getGraphConfig: getLineConfig,
-    GraphConstructor: Polyline,
+    getGraphConstructor: _ => Polyline,
   })
 
   doUpdate({
     charts,
     seriesConfig: allAxis,
-    key: 'axisTick',
+    key: AxisKey.AxisTick,
     getGraphConfig: getTickConfig,
-    GraphConstructor: Polyline,
+    getGraphConstructor: _ => Polyline,
   })
 
   doUpdate({
     charts,
     seriesConfig: allAxis,
-    key: 'axisLabel',
+    key: AxisKey.AxisLabel,
     getGraphConfig: getLabelConfig,
-    GraphConstructor: Text,
+    getGraphConstructor: _ => Text,
   })
 
   doUpdate({
     charts,
     seriesConfig: allAxis,
-    key: 'axisName',
+    key: AxisKey.AxisName,
     getGraphConfig: getNameConfig,
-    GraphConstructor: Text,
+    getGraphConstructor: _ => Text,
   })
 
   doUpdate({
     charts,
     seriesConfig: allAxis,
-    key: 'splitLine',
+    key: AxisKey.SplitLine,
     getGraphConfig: getSplitLineConfig,
-    GraphConstructor: Polyline,
+    getGraphConstructor: _ => Polyline,
   })
 
   charts.axisData = allAxis

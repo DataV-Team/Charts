@@ -3,6 +3,8 @@ import { EaseCurve } from '@jiaminghi/transition/types/types/core'
 
 export type LineLabelPosition = 'top' | 'center' | 'bottom'
 
+export type LineLabelFormatter = (params: { value: number; index: number }) => string
+
 export type LineConfig = {
   /**
    * @description Type
@@ -91,11 +93,11 @@ export type LineConfig = {
     /**
      * @description Line label offset
      */
-    offset: number[]
+    offset: [number, number]
     /**
      * @description Line label formatter
      */
-    formatter?: string | Function
+    formatter?: string | LineLabelFormatter
     /**
      * @description Line label default style configuration
      */

@@ -6,13 +6,19 @@ import { getPolylineLength } from '../utils/graph'
 import Charts from '..'
 import { _Option, _OptionSeriesItem } from '../types/class/charts'
 import { getDefaultConfig } from '../config'
-import { LineConfig, _LineConfig, LineFillBottomPos } from '../types/config/line'
+import {
+  LineConfig,
+  _LineConfig,
+  LineFillBottomPos,
+  LineLabelFormatter,
+} from '../types/config/line'
 import { _AxisConfig } from '../types/config/axis'
 import { PointCoordinate } from '../types/common'
-import { Polyline, Graph } from '@jiaminghi/c-render'
+import { Polyline, Graph, Circle, Text, Smoothline } from '@jiaminghi/c-render'
 import { Point, GraphConfig } from '@jiaminghi/c-render/es/types/core/graph'
 import { Updater } from '../class/updater.class'
 import { PolylineShape } from '@jiaminghi/c-render/es/types/graphs/shape'
+import { LineKey } from '../types/core/line'
 
 const { polylineToBezierCurve, getBezierCurveLength } = bezierCurve
 
@@ -61,9 +67,9 @@ function getLinePosition(
   const { maxValue, minValue } = valueAxis
   const valueMinus = maxValue - minValue
 
-  const position = new Array(tickNum).fill(0).map((foo, i) => {
+  const position = new Array(tickNum).fill(0).map((_, i) => {
     const v = lineData[i]
-    if (isNumber(v)) return undefined
+    if (!isNumber(v)) return undefined
 
     let valuePercent = (v! - minValue) / valueMinus
 
@@ -139,6 +145,25 @@ function getLineAndAreaShape(lineItem: _LineConfig) {
 
   return {
     points: linePosition,
+  }
+}
+
+function getGradientParams(lineItem: _LineConfig) {
+  const { lineFillBottomPos, linePosition } = lineItem
+
+  const { changeIndex, changeValue } = lineFillBottomPos
+
+  const mainPos = linePosition.map(p => p[changeIndex])
+  const maxPos = Math.max(...mainPos)
+  const minPos = Math.min(...mainPos)
+
+  let beginPos = maxPos
+  if (changeIndex === 1) beginPos = minPos
+
+  if (changeIndex === 1) {
+    return [0, beginPos, 0, changeValue]
+  } else {
+    return [beginPos, 0, changeValue, 0]
   }
 }
 
@@ -223,14 +248,19 @@ function getStartLineAreaConfig(lineItem: _LineConfig) {
   return [config]
 }
 
-function beforeUpdateLineAndArea(graphs: Graph[], lineItem: _LineConfig, updater: Updater) {
+function beforeUpdateLineAndArea(
+  graphs: Graph[],
+  lineItem: _LineConfig,
+  _: number,
+  updater: Updater
+) {
   if (!graphs.length) return
   const { render } = updater.charts
 
   const delAll = (graphs[0] as Polyline).name !== getLineGraphName(lineItem)
   if (!delAll) return
 
-  graphs.forEach(_ => render.delGraph(_, true))
+  render.delGraph(graphs, true)
   graphs.splice(0)
 }
 
@@ -254,6 +284,28 @@ function beforeChangeLineAndArea(graph: Graph, graphConfig: GraphConfig) {
   }
 }
 
+function getLineLength(points: PointCoordinate[], smooth = false) {
+  if (!smooth) return getPolylineLength(points)
+
+  const curve = polylineToBezierCurve(points)
+
+  return getBezierCurveLength(curve)
+}
+
+function getLineStyle(lineItem: _LineConfig) {
+  const { lineStyle, color, smooth, linePosition } = lineItem
+
+  const lineLength = getLineLength(linePosition, smooth)
+
+  return deepMerge(
+    {
+      stroke: color,
+      lineDash: [lineLength, 0],
+    },
+    lineStyle
+  )
+}
+
 function getLineConfig(lineItem: _LineConfig) {
   const { animationCurve, animationFrame, rLevel } = lineItem
 
@@ -269,101 +321,7 @@ function getLineConfig(lineItem: _LineConfig) {
   ]
 }
 
-export function line(charts: Charts, option: _Option): void {
-  const { xAxis, yAxis, series } = option
-
-  let lines: _LineConfig[] = []
-
-  if (xAxis && yAxis && series) {
-    const needLines = initNeedSeries(series, getDefaultConfig('line'), 'line') as _OptionSeriesItem<
-      LineConfig
-    >[]
-
-    lines = initLines(needLines, option)
-
-    lines = calcLinesPosition(lines, charts)
-  }
-
-  doUpdate({
-    charts,
-    seriesConfig: lines,
-    key: 'lineArea',
-    getGraphConfig: getLineAreaConfig,
-    getStartGraphConfig: getStartLineAreaConfig,
-    beforeUpdate: beforeUpdateLineAndArea,
-    beforeChange: beforeChangeLineAndArea,
-    GraphConstructor: Polyline,
-  })
-
-  doUpdate({
-    charts,
-    seriesConfig: lines,
-    key: 'line',
-    getGraphConfig: getLineConfig,
-    getStartGraphConfig: getStartLineConfig,
-    beforeUpdate: beforeUpdateLineAndArea,
-    beforeChange: beforeChangeLineAndArea,
-    GraphConstructor: Polyline,
-  })
-
-  doUpdate({
-    chart,
-    series: lines,
-    key: 'linePoint',
-    getGraphConfig: getPointConfig,
-    getStartGraphConfig: getStartPointConfig,
-  })
-
-  doUpdate({
-    chart,
-    series: lines,
-    key: 'lineLabel',
-    getGraphConfig: getLabelConfig,
-  })
-}
-
-function getGradientParams(lineItem) {
-  const { lineFillBottomPos, linePosition } = lineItem
-
-  const { changeIndex, changeValue } = lineFillBottomPos
-
-  const mainPos = linePosition.map(p => p[changeIndex])
-  const maxPos = Math.max(...mainPos)
-  const minPos = Math.min(...mainPos)
-
-  let beginPos = maxPos
-  if (changeIndex === 1) beginPos = minPos
-
-  if (changeIndex === 1) {
-    return [0, beginPos, 0, changeValue]
-  } else {
-    return [beginPos, 0, changeValue, 0]
-  }
-}
-
-function getLineStyle(lineItem) {
-  const { lineStyle, color, smooth, linePosition } = lineItem
-
-  const lineLength = getLineLength(linePosition, smooth)
-
-  return deepMerge(
-    {
-      stroke: color,
-      lineDash: [lineLength, 0],
-    },
-    lineStyle
-  )
-}
-
-function getLineLength(points, smooth = false) {
-  if (!smooth) return getPolylineLength(points)
-
-  const curve = polylineToBezierCurve(points)
-
-  return getBezierCurveLength(curve)
-}
-
-function getStartLineConfig(lineItem) {
+function getStartLineConfig(lineItem: _LineConfig) {
   const { lineDash } = lineItem.lineStyle
 
   const config = getLineConfig(lineItem)[0]
@@ -381,7 +339,29 @@ function getStartLineConfig(lineItem) {
   return [config]
 }
 
-function getPointConfig(lineItem) {
+function getPointShapes(lineItem: _LineConfig) {
+  const {
+    linePosition,
+    linePoint: { radius },
+  } = lineItem
+
+  return linePosition.map(([rx, ry]) => ({
+    r: radius,
+    rx,
+    ry,
+  }))
+}
+
+function getPointStyle(lineItem: _LineConfig) {
+  let {
+    color,
+    linePoint: { style },
+  } = lineItem
+
+  return deepMerge({ stroke: color }, style)
+}
+
+function getPointConfig(lineItem: _LineConfig) {
   const { animationCurve, animationFrame, rLevel } = lineItem
 
   const shapes = getPointShapes(lineItem)
@@ -399,29 +379,7 @@ function getPointConfig(lineItem) {
   }))
 }
 
-function getPointShapes(lineItem) {
-  const {
-    linePosition,
-    linePoint: { radius },
-  } = lineItem
-
-  return linePosition.map(([rx, ry]) => ({
-    r: radius,
-    rx,
-    ry,
-  }))
-}
-
-function getPointStyle(lineItem) {
-  let {
-    color,
-    linePoint: { style },
-  } = lineItem
-
-  return deepMerge({ stroke: color }, style)
-}
-
-function getStartPointConfig(lineItem) {
+function getStartPointConfig(lineItem: _LineConfig) {
   const configs = getPointConfig(lineItem)
 
   configs.forEach(config => {
@@ -431,34 +389,37 @@ function getStartPointConfig(lineItem) {
   return configs
 }
 
-function getLabelConfig(lineItem) {
-  const { animationCurve, animationFrame, rLevel } = lineItem
+function formatterLabel(lineItem: _LineConfig) {
+  let {
+    data,
+    label: { formatter },
+  } = lineItem
 
-  const shapes = getLabelShapes(lineItem)
-  const style = getLabelStyle(lineItem)
+  const dataStr = data.filter(d => typeof d === 'number').map(d => d.toString())
 
-  return shapes.map((shape, i) => ({
-    name: 'text',
-    index: rLevel + 3,
-    visible: lineItem.label.show,
-    animationCurve,
-    animationFrame,
-    shape,
-    style,
-  }))
+  if (!formatter) return dataStr
+
+  const type = typeof formatter
+
+  if (type === 'string') return dataStr.map(d => (formatter as string).replace('{value}', d))
+
+  if (type === 'function')
+    return dataStr.map((_, index) =>
+      (formatter as LineLabelFormatter)({ value: data[index], index })
+    )
+
+  return dataStr
 }
 
-function getLabelShapes(lineItem) {
-  const contents = formatterLabel(lineItem)
-  const position = getLabelPosition(lineItem)
-
-  return contents.map((content, i) => ({
-    content,
-    position: position[i],
-  }))
+function getCenterLabelPoint([ax, ay]: PointCoordinate, [bx, by]: PointCoordinate) {
+  return [(ax + bx) / 2, (ay + by) / 2] as PointCoordinate
 }
 
-function getLabelPosition(lineItem) {
+function getOffsetedPoint([x, y]: PointCoordinate, [ox, oy]: [number, number]) {
+  return [x + ox, y + oy] as PointCoordinate
+}
+
+function getLabelPosition(lineItem: _LineConfig) {
   const { linePosition, lineFillBottomPos, label } = lineItem
 
   let { position, offset } = label
@@ -472,7 +433,7 @@ function getLabelPosition(lineItem) {
     }
 
     if (position === 'center') {
-      const bottom = [...pos]
+      const bottom = [...pos] as PointCoordinate
       bottom[changeIndex] = changeValue
 
       pos = getCenterLabelPoint(pos, bottom)
@@ -482,38 +443,99 @@ function getLabelPosition(lineItem) {
   })
 }
 
-function getOffsetedPoint([x, y], [ox, oy]) {
-  return [x + ox, y + oy]
+function getLabelShapes(lineItem: _LineConfig) {
+  const contents = formatterLabel(lineItem)
+  const position = getLabelPosition(lineItem)
+
+  return contents.map((content, i) => ({
+    content,
+    position: position[i],
+  }))
 }
 
-function getCenterLabelPoint([ax, ay], [bx, by]) {
-  return [(ax + bx) / 2, (ay + by) / 2]
-}
-
-function formatterLabel(lineItem) {
-  let {
-    data,
-    label: { formatter },
-  } = lineItem
-
-  data = data.filter(d => typeof d === 'number').map(d => d.toString())
-
-  if (!formatter) return data
-
-  const type = typeof formatter
-
-  if (type === 'string') return data.map(d => formatter.replace('{value}', d))
-
-  if (type === 'function') return data.map((value, index) => formatter({ value, index }))
-
-  return data
-}
-
-function getLabelStyle(lineItem) {
+function getLabelStyle(lineItem: _LineConfig) {
   const {
     color,
     label: { style },
   } = lineItem
 
   return deepMerge({ fill: color }, style)
+}
+
+function getLabelConfig(lineItem: _LineConfig) {
+  const { animationCurve, animationFrame, rLevel } = lineItem
+
+  const shapes = getLabelShapes(lineItem)
+  const style = getLabelStyle(lineItem)
+
+  return shapes.map(shape => ({
+    name: 'text',
+    index: rLevel + 3,
+    visible: lineItem.label.show,
+    animationCurve,
+    animationFrame,
+    shape,
+    style,
+  }))
+}
+
+function getLineGraphConstructor(lineItem: _LineConfig) {
+  const { smooth } = lineItem
+
+  return smooth ? Smoothline : Polyline
+}
+
+export default function line(charts: Charts, option: _Option): void {
+  const { xAxis, yAxis, series } = option
+
+  let lines: _LineConfig[] = []
+
+  if (xAxis && yAxis && series) {
+    const needLines = initNeedSeries(series, getDefaultConfig('line'), 'line') as _OptionSeriesItem<
+      LineConfig
+    >[]
+
+    lines = initLines(needLines, option)
+
+    lines = calcLinesPosition(lines, charts)
+  }
+
+  doUpdate({
+    charts,
+    seriesConfig: lines,
+    key: LineKey.LineArea,
+    getGraphConfig: getLineAreaConfig,
+    getStartGraphConfig: getStartLineAreaConfig,
+    beforeUpdate: beforeUpdateLineAndArea,
+    beforeChange: beforeChangeLineAndArea,
+    getGraphConstructor: getLineGraphConstructor,
+  })
+
+  doUpdate({
+    charts,
+    seriesConfig: lines,
+    key: LineKey.Line,
+    getGraphConfig: getLineConfig,
+    getStartGraphConfig: getStartLineConfig,
+    beforeUpdate: beforeUpdateLineAndArea,
+    beforeChange: beforeChangeLineAndArea,
+    getGraphConstructor: getLineGraphConstructor,
+  })
+
+  doUpdate({
+    charts,
+    seriesConfig: lines,
+    key: LineKey.LinePoint,
+    getGraphConfig: getPointConfig,
+    getStartGraphConfig: getStartPointConfig,
+    getGraphConstructor: _ => Circle,
+  })
+
+  doUpdate({
+    charts,
+    seriesConfig: lines,
+    key: LineKey.LineLabel,
+    getGraphConfig: getLabelConfig,
+    getGraphConstructor: _ => Text,
+  })
 }

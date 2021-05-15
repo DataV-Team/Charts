@@ -1,8 +1,9 @@
-import { GraphStyleConfig } from '../common'
+import { GraphStyleConfig, PointCoordinate } from '../common'
 import { LiteralUnion } from '@jiaminghi/c-render/es/types/common'
 import { EaseCurve } from '@jiaminghi/transition/types/types/core'
+import { _AxisConfig } from './axis'
 
-export type BarShapeType = 'normal' | 'round' | 'leftEchelon' | 'rightEchelon'
+export type BarShapeType = 'normal' | 'leftEchelon' | 'rightEchelon'
 
 export type BarLabelPosition = 'top' | 'center' | 'bottom'
 
@@ -158,4 +159,16 @@ export type BarConfig = {
    * @description Bar animation frame
    */
   animationFrame: number
+}
+
+export type _BarConfig = BarConfig & {
+  valueAxis: _AxisConfig
+  labelAxis: _AxisConfig
+  barIndex: number
+  barNum: number
+  barCategoryWidth: number
+  barAllWidthAndGap: number
+  barLabelAxisPos: number[]
+  barValueAxisPos: PointCoordinate[]
+  color: string
 }

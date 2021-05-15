@@ -154,4 +154,5 @@ export type _AxisConfig = AxisConfig & {
   tickLinePosition: LineCoordinate[]
   splitLinePosition: LineCoordinate[]
   namePosition: PointCoordinate
+  tickGap: number
 }

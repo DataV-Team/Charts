@@ -50,7 +50,7 @@
   "homepage": "https://github.com/DataV-Team/charts#readme",
   "dependencies": {
     "@babel/runtime": "^7.5.5",
-    "@jiaminghi/c-render": "^1.0.0-alpha.3"
+    "@jiaminghi/c-render": "^1.0.0-alpha.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",

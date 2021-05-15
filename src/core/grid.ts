@@ -9,6 +9,7 @@ import { Updater } from '../class/updater.class'
 import { GridConfig } from '../types/config/grid'
 import { RectShape } from '@jiaminghi/c-render/es/types/graphs/shape'
 import { GraphStyleConfig } from '../types/common'
+import { GridKey } from '../types/core/grid'
 
 function getNumberValue(val: number | string, all: number): number {
   if (typeof val === 'number') return val
@@ -60,8 +61,8 @@ export default function grid(charts: Charts, option: Option): void {
   doUpdate({
     charts,
     seriesConfig: [grid],
-    key: 'grid',
+    key: GridKey.Grid,
     getGraphConfig: getGridConfig,
-    GraphConstructor: Rect,
+    getGraphConstructor: _ => Rect,
   })
 }

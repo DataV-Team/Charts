@@ -4,24 +4,27 @@ import { XAxisConfig, YAxisConfig } from '../config/axis'
 import { BarConfig } from '../config/bar'
 import { GaugeConfig } from '../config/gauge'
 import { LineConfig } from '../config/line'
+import { Color } from '../config/color'
+import { DeepPartial } from '../common'
 
 export type OptionSeriesItem = LineConfig | BarConfig | GaugeConfig
 
 export type _OptionSeriesItem<T = OptionSeriesItem> = T & {
   seriesIndex: number
+  color: Color
 }
 
 export type Option = {
-  grid?: Partial<GridConfig>
-  xAxis?: Partial<XAxisConfig> | Partial<XAxisConfig>[]
-  yAxis?: Partial<YAxisConfig> | Partial<YAxisConfig>[]
-  series?: Partial<OptionSeriesItem>[]
+  grid?: DeepPartial<GridConfig>
+  xAxis?: DeepPartial<XAxisConfig> | DeepPartial<XAxisConfig>[]
+  yAxis?: DeepPartial<YAxisConfig> | DeepPartial<YAxisConfig>[]
+  series?: DeepPartial<OptionSeriesItem>[]
   color?: string[]
 }
 
 export type _Option = Option & {
   color: string[]
-  series?: Partial<_OptionSeriesItem>[]
+  series?: DeepPartial<_OptionSeriesItem>[]
 }
 
 export type GraphSeriesItem = {
